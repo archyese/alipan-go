@@ -9,9 +9,9 @@ import (
 	"strings"
 )
 
-func DoRequest[R any](l AccessTokenLoader, c *http.Client, req *http.Request) (*R, error) {
+func DoRequest[R any](username string, l AccessTokenLoader, c *http.Client, req *http.Request) (*R, error) {
 	if l != nil {
-		token, err := l.LoadAccessToken()
+		token, err := l.LoadAccessToken(username)
 		if err != nil {
 			return nil, err
 		}
@@ -45,7 +45,7 @@ func DoRequest[R any](l AccessTokenLoader, c *http.Client, req *http.Request) (*
 	return &result, nil
 }
 
-func DoFormRequest[R any](l AccessTokenLoader, c *http.Client, apiUrl string, formValues url.Values) (*R, error) {
+func DoFormRequest[R any](username string, l AccessTokenLoader, c *http.Client, apiUrl string, formValues url.Values) (*R, error) {
 	req, err := http.NewRequest(
 		"POST",
 		apiUrl,
@@ -55,10 +55,10 @@ func DoFormRequest[R any](l AccessTokenLoader, c *http.Client, apiUrl string, fo
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	return DoRequest[R](l, c, req)
+	return DoRequest[R](username, l, c, req)
 }
 
-func DoJsonRequest[R any](l AccessTokenLoader, c *http.Client, apiUrl string, params interface{}) (*R, error) {
+func DoJsonRequest[R any](username string, l AccessTokenLoader, c *http.Client, apiUrl string, params interface{}) (*R, error) {
 	buff, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -72,10 +72,10 @@ func DoJsonRequest[R any](l AccessTokenLoader, c *http.Client, apiUrl string, pa
 		return nil, err
 	}
 	req.Header.Set("Content-Type", "application/json")
-	return DoRequest[R](l, c, req)
+	return DoRequest[R](username, l, c, req)
 }
 
-func DoGetQuery[R any](l AccessTokenLoader, c *http.Client, apiUrl string, queryValues url.Values) (*R, error) {
+func DoGetQuery[R any](username string, l AccessTokenLoader, c *http.Client, apiUrl string, queryValues url.Values) (*R, error) {
 	if len(queryValues) > 0 {
 		apiUrl += "?" + queryValues.Encode()
 	}
@@ -83,13 +83,13 @@ func DoGetQuery[R any](l AccessTokenLoader, c *http.Client, apiUrl string, query
 	if err != nil {
 		return nil, err
 	}
-	return DoRequest[R](l, c, req)
+	return DoRequest[R](username, l, c, req)
 }
 
-func DoPostNoBody[R any](l AccessTokenLoader, c *http.Client, apiUrl string) (*R, error) {
+func DoPostNoBody[R any](username string, l AccessTokenLoader, c *http.Client, apiUrl string) (*R, error) {
 	req, err := http.NewRequest("POST", apiUrl, nil)
 	if err != nil {
 		return nil, err
 	}
-	return DoRequest[R](l, c, req)
+	return DoRequest[R](username, l, c, req)
 }

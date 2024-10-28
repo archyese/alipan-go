@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/niuhuan/alipan-go/oauth_client/protos"
+	"github.com/archyese/alipan-sdk/oauth_client/protos"
 )
 
 func (c *OauthClient) OauthAuthorizeUrl(params *protos.OauthAuthorizeUrlParams) (string, error) {

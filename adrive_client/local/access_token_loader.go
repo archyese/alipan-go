@@ -2,9 +2,9 @@ package local
 
 import (
 	"errors"
-	"github.com/niuhuan/alipan-go/common"
-	"github.com/niuhuan/alipan-go/oauth_client"
-	"github.com/niuhuan/alipan-go/oauth_client/protos"
+	"github.com/archyese/alipan-sdk/common"
+	"github.com/archyese/alipan-sdk/oauth_client"
+	"github.com/archyese/alipan-sdk/oauth_client/protos"
 )
 
 type AccessToken struct {
@@ -36,7 +36,7 @@ type OauthClientTokenLoader struct {
 }
 
 // LoadAccessToken impl AccessTokenLoad for OauthClientTokenLoader
-func (o *OauthClientTokenLoader) LoadAccessToken() (*string, error) {
+func (o *OauthClientTokenLoader) LoadAccessToken(username string) (*string, error) {
 	a, e := o.AccessTokenStore.LoadAccessToken()
 	if e != nil {
 		return nil, e
@@ -48,7 +48,7 @@ func (o *OauthClientTokenLoader) LoadAccessToken() (*string, error) {
 	if now < a.CreatedAt+a.ExpiresIn*int64(3)/int64(4) {
 		return &a.AccessToken, nil
 	}
-	token, e := o.OauthClient.OauthAccessToken(&protos.OauthAccessTokenParams{
+	token, e := o.OauthClient.OauthAccessToken(username, &protos.OauthAccessTokenParams{
 		GrantType:    "refresh_token",
 		RefreshToken: a.RefreshToken,
 	})
@@ -61,4 +61,8 @@ func (o *OauthClientTokenLoader) LoadAccessToken() (*string, error) {
 		return nil, e
 	}
 	return &accessToken.AccessToken, nil
+}
+
+func (o *OauthClientTokenLoader) SaveAccessToken(token any, username string) error {
+	return o.AccessTokenStore.SaveAccessToken(token.(*AccessToken))
 }

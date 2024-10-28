@@ -1,4 +1,4 @@
-module github.com/niuhuan/alipan-go
+module github.com/archyese/alipan-sdk
 
 go 1.19
 

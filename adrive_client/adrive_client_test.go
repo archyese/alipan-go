@@ -5,9 +5,9 @@ import (
 	"encoding/hex"
 	"fmt"
 	"github.com/BurntSushi/toml"
-	"github.com/niuhuan/alipan-go/adrive_client/local"
-	"github.com/niuhuan/alipan-go/adrive_client/protos"
-	"github.com/niuhuan/alipan-go/oauth_client"
+	"github.com/archyese/alipan-sdk/adrive_client/local"
+	"github.com/archyese/alipan-sdk/adrive_client/protos"
+	"github.com/archyese/alipan-sdk/oauth_client"
 	"io"
 	"log"
 	"net/http"
@@ -76,7 +76,7 @@ func adriveClient(t *testing.T) *AdriveClient {
 
 func TestAdriveClient_OauthUserInfo(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.OauthUserInfo(&protos.OauthUserInfoParams{})
+	info, err := client.OauthUserInfo("yese", &protos.OauthUserInfoParams{})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -85,7 +85,7 @@ func TestAdriveClient_OauthUserInfo(t *testing.T) {
 
 func TestAdriveClient_OauthUserScopes(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.OauthUserScopes(&protos.OauthUserScopesParams{})
+	info, err := client.OauthUserScopes("yese", &protos.OauthUserScopesParams{})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -94,7 +94,7 @@ func TestAdriveClient_OauthUserScopes(t *testing.T) {
 
 func TestAdriveClient_AdriveUserGetSpaceInfo(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveUserGetSpaceInfo(&protos.AdriveUserGetSpaceInfoParams{})
+	info, err := client.AdriveUserGetSpaceInfo("yese", &protos.AdriveUserGetSpaceInfoParams{})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -103,7 +103,7 @@ func TestAdriveClient_AdriveUserGetSpaceInfo(t *testing.T) {
 
 func TestAdriveClient_AdriveUserGetDriveInfo(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveUserGetDriveInfo(&protos.AdriveUserGetDriveInfoParams{})
+	info, err := client.AdriveUserGetDriveInfo("yese", &protos.AdriveUserGetDriveInfoParams{})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -112,7 +112,7 @@ func TestAdriveClient_AdriveUserGetDriveInfo(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileList(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileList(&protos.AdriveOpenFileListParams{
+	info, err := client.AdriveOpenFileList("yese", &protos.AdriveOpenFileListParams{
 		DriveId:      "drive_id",
 		ParentFileId: "root",
 	})
@@ -124,7 +124,7 @@ func TestAdriveClient_AdriveOpenFileList(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileGet(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileGet(&protos.AdriveOpenFileGetParams{
+	info, err := client.AdriveOpenFileGet("yese", &protos.AdriveOpenFileGetParams{
 		DriveId: "drive_id",
 		FileId:  "file_id",
 	})
@@ -136,7 +136,7 @@ func TestAdriveClient_AdriveOpenFileGet(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileGetByPath(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileGetByPath(&protos.AdriveOpenFileGetByPathParams{
+	info, err := client.AdriveOpenFileGetByPath("yese", &protos.AdriveOpenFileGetByPathParams{
 		DriveId:  "drive_id",
 		FilePath: "/file_path",
 	})
@@ -148,7 +148,7 @@ func TestAdriveClient_AdriveOpenFileGetByPath(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileGetDownloadUrl(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileGetDownloadUrl(&protos.AdriveOpenFileGetDownloadUrlParams{
+	info, err := client.AdriveOpenFileGetDownloadUrl("yese", &protos.AdriveOpenFileGetDownloadUrlParams{
 		DriveId: "drive_id",
 		FileId:  "file_id",
 	})
@@ -160,7 +160,7 @@ func TestAdriveClient_AdriveOpenFileGetDownloadUrl(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileRecyclebinTrash(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileRecyclebinTrash(&protos.AdriveOpenFileRecyclebinTrashParams{
+	info, err := client.AdriveOpenFileRecyclebinTrash("yese", &protos.AdriveOpenFileRecyclebinTrashParams{
 		DriveId: "drive_id",
 		FileId:  "file_id",
 	})
@@ -172,7 +172,7 @@ func TestAdriveClient_AdriveOpenFileRecyclebinTrash(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileDelete(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileDelete(&protos.AdriveOpenFileDeleteParams{
+	info, err := client.AdriveOpenFileDelete("yese", &protos.AdriveOpenFileDeleteParams{
 		DriveId: "drive_id",
 		FileId:  "file_id",
 	})
@@ -184,7 +184,7 @@ func TestAdriveClient_AdriveOpenFileDelete(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileCopy(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileCopy(&protos.AdriveOpenFileCopyParams{
+	info, err := client.AdriveOpenFileCopy("yese", &protos.AdriveOpenFileCopyParams{
 		DriveId:        "drive_id",
 		FileId:         "file_id",
 		ToDriveId:      "to_drive_id",
@@ -198,7 +198,7 @@ func TestAdriveClient_AdriveOpenFileCopy(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileMove(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileMove(&protos.AdriveOpenFileMoveParams{
+	info, err := client.AdriveOpenFileMove("yese", &protos.AdriveOpenFileMoveParams{
 		DriveId:        "drive_id",
 		FileId:         "file_id",
 		ToParentFileId: "to_parent_file_id",
@@ -211,7 +211,7 @@ func TestAdriveClient_AdriveOpenFileMove(t *testing.T) {
 
 func TestAdriveClient_AdriveOpenFileUpdate(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileUpdate(&protos.AdriveOpenFileUpdateParams{
+	info, err := client.AdriveOpenFileUpdate("yese", &protos.AdriveOpenFileUpdateParams{
 		DriveId: "drive_id",
 		FileId:  "file_id",
 		Name:    "new_name",
@@ -229,7 +229,7 @@ const TEXT = "Hello, World!"
 
 func TestAdriveClient_AdriveOpenFileCreate_RapidUpload(t *testing.T) {
 	client := adriveClient(t)
-	info, err := client.AdriveOpenFileCreate(&protos.AdriveOpenFileCreateParams{
+	info, err := client.AdriveOpenFileCreate("yese", &protos.AdriveOpenFileCreateParams{
 		DriveId:         "drive_id",
 		ParentFileId:    "root",
 		Type:            "file",
@@ -255,7 +255,7 @@ func sha1ForText(text string) string {
 func TestAdriveClient_AdriveOpenFileCreate_NormalUpload(t *testing.T) {
 	client := adriveClient(t)
 	// 创建文件
-	create, err := client.AdriveOpenFileCreate(&protos.AdriveOpenFileCreateParams{
+	create, err := client.AdriveOpenFileCreate("yese", &protos.AdriveOpenFileCreateParams{
 		DriveId:      "drive_id",
 		ParentFileId: "root",
 		Type:         "file",
@@ -283,7 +283,7 @@ func TestAdriveClient_AdriveOpenFileCreate_NormalUpload(t *testing.T) {
 		return
 	}
 	// 获取上传链接
-	uploadUrlGet, err := client.AdriveOpenFileGetUploadUrl(&protos.AdriveOpenFileGetUploadUrlParams{
+	uploadUrlGet, err := client.AdriveOpenFileGetUploadUrl("yese", &protos.AdriveOpenFileGetUploadUrlParams{
 		DriveId:  create.DriveId,
 		FileId:   create.FileId,
 		UploadId: create.UploadId,
@@ -323,7 +323,7 @@ func TestAdriveClient_AdriveOpenFileCreate_NormalUpload(t *testing.T) {
 	}
 	t.Log(fmt.Sprintf("responseCode: %d, responseText: %s", responseCode, responseText))
 	// 完成
-	complete, err := client.AdriveOpenFileComplete(&protos.AdriveOpenFileCompleteParams{
+	complete, err := client.AdriveOpenFileComplete("yese", &protos.AdriveOpenFileCompleteParams{
 		DriveId:  create.DriveId,
 		FileId:   create.FileId,
 		UploadId: create.UploadId,

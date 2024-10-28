@@ -2,11 +2,11 @@ package alipan
 
 import (
 	"fmt"
-	"github.com/niuhuan/alipan-go/adrive_client/protos"
-	"github.com/niuhuan/alipan-go/common"
+	"github.com/archyese/alipan-sdk/adrive_client/protos"
+	"github.com/archyese/alipan-sdk/common"
 )
 
-func (c *AdriveClient) AdriveOpenFileGetDownloadUrl(params *protos.AdriveOpenFileGetDownloadUrlParams) (*protos.AdriveOpenFileGetDownloadUrl, error) {
+func (c *AdriveClient) AdriveOpenFileGetDownloadUrl(username string, params *protos.AdriveOpenFileGetDownloadUrlParams) (*protos.AdriveOpenFileGetDownloadUrl, error) {
 	apiUrl := fmt.Sprintf("%s/adrive/v1.0/openFile/getDownloadUrl", c.ApiHost)
-	return common.DoJsonRequest[protos.AdriveOpenFileGetDownloadUrl](c.AccessTokenLoader, c.Agent, apiUrl, params)
+	return common.DoJsonRequest[protos.AdriveOpenFileGetDownloadUrl](username, c.AccessTokenLoader, c.Agent, apiUrl, params)
 }

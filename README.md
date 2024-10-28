@@ -28,8 +28,8 @@ alipan-go
 ### 📦 安装
 
 ```go
-import "github.com/niuhuan/alipan-go/oauth_client"
-import "github.com/niuhuan/alipan-go/adrive_client"
+import "github.com/archyese/alipan-sdk/oauth_client"
+import "github.com/archyese/alipan-sdk/adrive_client"
 ```
 
 ### 📃 调用
