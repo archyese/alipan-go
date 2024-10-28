@@ -2,7 +2,7 @@ package oauth_client
 
 import (
 	"github.com/BurntSushi/toml"
-	"github.com/niuhuan/alipan-go/oauth_client/protos"
+	"github.com/archyese/alipan-sdk/oauth_client/protos"
 	"os"
 	"testing"
 )
@@ -38,7 +38,7 @@ func TestOauthClient_OauthAuthorizeUrl(t *testing.T) {
 func TestOauthClient_OauthAccessToken(t *testing.T) {
 	client := oauthClient(t)
 	code := "code"
-	token, err := client.OauthAccessToken(&protos.OauthAccessTokenParams{
+	token, err := client.OauthAccessToken("yese",&protos.OauthAccessTokenParams{
 		GrantType: "authorization_code",
 		Code:      code,
 	})

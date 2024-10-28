@@ -1,7 +1,7 @@
 package alipan
 
 import (
-	"github.com/niuhuan/alipan-go/common"
+	"github.com/archyese/alipan-sdk/common"
 	"net/http"
 )
 

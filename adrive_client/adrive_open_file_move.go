@@ -2,11 +2,11 @@ package alipan
 
 import (
 	"fmt"
-	"github.com/niuhuan/alipan-go/adrive_client/protos"
-	"github.com/niuhuan/alipan-go/common"
+	"github.com/archyese/alipan-sdk/adrive_client/protos"
+	"github.com/archyese/alipan-sdk/common"
 )
 
-func (c *AdriveClient) AdriveOpenFileMove(params *protos.AdriveOpenFileMoveParams) (*protos.AdriveOpenFileMove, error) {
+func (c *AdriveClient) AdriveOpenFileMove(username string, params *protos.AdriveOpenFileMoveParams) (*protos.AdriveOpenFileMove, error) {
 	apiUrl := fmt.Sprintf("%s/adrive/v1.0/openFile/move", c.ApiHost)
-	return common.DoJsonRequest[protos.AdriveOpenFileMove](c.AccessTokenLoader, c.Agent, apiUrl, params)
+	return common.DoJsonRequest[protos.AdriveOpenFileMove](username, c.AccessTokenLoader, c.Agent, apiUrl, params)
 }
